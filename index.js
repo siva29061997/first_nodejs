@@ -3,7 +3,7 @@ const cors = require("cors")
 const app = express()
 const mongodb = require("mongodb")
 const mongoClient = mongodb.MongoClient
-const URL = "mongodb+srv://shibil_siva:SivA@1997@siva.5o2iufb.mongodb.net/?retryWrites=true&w=majority"
+const URL = "mongodb+srv://shibil_siva:siva1997@siva.5o2iufb.mongodb.net/?retryWrites=true&w=majority"
 const DB = "batch_37_wd_Tamil"
 let users = [];
 
