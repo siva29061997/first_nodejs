@@ -3,8 +3,11 @@ const cors = require("cors")
 const app = express()
 const mongodb = require("mongodb")
 const mongoClient = mongodb.MongoClient
-const URL = "mongodb+srv://shibil_siva:siva1997@siva.5o2iufb.mongodb.net/?retryWrites=true&w=majority"
+const URL = process.env.DB
 const DB = "batch_37_wd_Tamil"
+const dotenv = require("dotenv").config
+
+// console.log(process)
 
 app.use(express.json());
 app.use(cors({
@@ -46,16 +49,15 @@ app.get("/users",async function (req, res) {
 app.post("/user",async function (req, res) {
     
     try {
-        // step 1:
+        
     const connection = await mongoClient.connect(URL)
-    // step 2:
+    
     const db = connection.db(DB)
-    // step 3:
-    // step 4:
+    
     await db.collection("users").insertOne(req.body)
-    // step 5:
+    
     await connection.close()
-    // error :
+   
     res.status(200).json({messege:"Done"})
     } catch (error) {
         res.status(500).json({
@@ -71,16 +73,15 @@ app.post("/user",async function (req, res) {
 app.get("/user/:id",async function (req, res) {
 
     try {
-        // step 1:
+        
     const connection = await mongoClient.connect(URL)
-    // step 2:
+    
     const db = connection.db(DB)
-    // step 3:
-    // step 4:
+    
     let user = await db.collection("users").findOne({_id: mongodb.ObjectId(req.params.id)});
-    // step 5:
+   
     await connection.close()
-    // error :
+    
     res.status(200).json(user)
     } catch (error) {
         res.status(500).json({
@@ -100,16 +101,15 @@ app.get("/user/:id",async function (req, res) {
 app.put("/user/:id",async function (req, res) {
 
     try {
-        // step 1:
+        
     const connection = await mongoClient.connect(URL)
-    // step 2:
+   
     const db = connection.db(DB)
-    // step 3:
-    // step 4:
+    
     let user = await db.collection("users").findOneAndUpdate({_id: mongodb.ObjectId(req.params.id)},{$set:req.body})
-    // step 5:
+    
     await connection.close()
-    // error :
+    
     res.status(200).json(user)
     } catch (error) {
         res.status(500).json({
@@ -136,16 +136,15 @@ app.put("/user/:id",async function (req, res) {
 app.delete("/user/:id",async function (req, res) {
 
     try {
-        // step 1:
+       
     const connection = await mongoClient.connect(URL)
-    // step 2:
+    
     const db = connection.db(DB)
-    // step 3:
-    // step 4:
+    
     let user = await db.collection("users").findOneAndDelete({_id: mongodb.ObjectId(req.params.id)});
-    // step 5:
+    
     await connection.close()
-    // error :
+    
     res.status(200).json(user)
     } catch (error) {
         res.status(500).json({
@@ -167,5 +166,10 @@ app.delete("/user/:id",async function (req, res) {
     //     });
     // }
 });
+
+app.post("/register",async function(req,res){
+
+});
+
 
 app.listen(process.env.PORT || 3000);
