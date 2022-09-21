@@ -5,9 +5,9 @@ const mongodb = require("mongodb")
 const mongoClient = mongodb.MongoClient
 const URL = process.env.DB
 const DB = "batch_37_wd_Tamil"
-const dotenv = require("dotenv").config
+const dotenv = require("dotenv").config()
 
-// console.log(process)
+console.log(process)
 
 app.use(express.json());
 app.use(cors({
